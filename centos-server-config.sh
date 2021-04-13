@@ -23,7 +23,7 @@ dnf update -y
 sed -i "s/enforcing/permissive/g" /etc/selinux/config
 mkdir -p /opt/aws/scripts
 mkdir -p /mnt/iso /var/www/html /opt/aws/bin /var/awslogs/state
-dnf install mlocate netpbm wget gcc python3 nfs-utils parallel s3cmd sysfsutils iftop iotop unzip cmake -y
+dnf install mlocate netpbm wget gcc python3 nfs-utils parallel sysfsutils iftop iotop unzip cmake -y
 updatedb
 dnf install cockpit-* -y
 dnf install mod_ssl -y
