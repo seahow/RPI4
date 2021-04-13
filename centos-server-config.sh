@@ -64,7 +64,7 @@ echo "mirrorlist=https://download.webmin.com/download/yum/mirrorlist" >>/etc/yum
 echo "enabled=1" >>/etc/yum.repos.d/webmin.repo
 wget http://www.webmin.com/jcameron-key.asc
 rpm --import jcameron-key.asc
-dnf install webmin
+dnf install webmin -y
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
