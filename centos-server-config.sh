@@ -41,11 +41,11 @@ dnf groupinstall "Xfce" --with-optional --hidden -y
 dnf install chromium -y
 dnf install flatpak snapd -y
 dnf flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-systemctl enable --now snapd.socket
-systemctl enable snapd
-systemctl start snapd
-snap install snap-store
-ln -s /var/lib/snapd/snap /snap
+# systemctl enable --now snapd.socket
+# systemctl enable snapd
+# systemctl start snapd
+# snap install snap-store
+# ln -s /var/lib/snapd/snap /snap
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
