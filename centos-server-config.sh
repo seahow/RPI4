@@ -39,8 +39,9 @@ echo "tmpfs   /var/log    tmpfs    defaults,noatime,nosuid,mode=0755,size=100m  
 mount -a
 dnf groupinstall "Xfce" --with-optional --hidden -y
 dnf install chromium -y
-dnf install flatpak snapd -y
+dnf install flatpak -y
 dnf flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# dnf install snapd -y
 # systemctl enable --now snapd.socket
 # systemctl enable snapd
 # systemctl start snapd
