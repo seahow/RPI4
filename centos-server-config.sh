@@ -23,7 +23,7 @@ dnf update -y
 sed -i "s/enforcing/permissive/g" /etc/selinux/config
 mkdir -p /opt/aws/scripts
 mkdir -p /mnt/iso /var/www/html /opt/aws/bin /var/awslogs/state
-dnf install mlocate netpbm wget gcc python3 nfs-utils parallel sysfsutils iftop iotop unzip cmake -y
+dnf install mlocate netpbm wget gcc python3 nfs-utils parallel sysfsutils iftop iotop unzip cmake lm_sensors -y
 updatedb
 dnf install cockpit-* -y
 dnf install mod_ssl -y
@@ -41,6 +41,14 @@ dnf groupinstall "Xfce" --with-optional --hidden -y
 dnf install chromium -y
 dnf install flatpak -y
 dnf flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+touch /etc/yum.repos.d/webmin.repo
+echo "[Webmin]" >>/etc/yum.repos.d/webmin.repo
+echo "name=Webmin Distribution Neutral" >>/etc/yum.repos.d/webmin.repo
+echo "mirrorlist=https://download.webmin.com/download/yum/mirrorlist" >>/etc/yum.repos.d/webmin.repo
+echo "enabled=1" >>/etc/yum.repos.d/webmin.repo
+wget http://www.webmin.com/jcameron-key.asc
+rpm --import jcameron-key.asc
+dnf install webmin
 # dnf install snapd -y
 # systemctl enable --now snapd.socket
 # systemctl enable snapd
