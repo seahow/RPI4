@@ -45,6 +45,7 @@ systemctl enable --now snapd.socket
 systemctl enable snapd
 systemctl start snapd
 snap install snap-store
+ln -s /var/lib/snapd/snap /snap
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
