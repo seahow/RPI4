@@ -20,10 +20,26 @@ dnf config-manager --enable extras
 dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 dnf clean all
 dnf update -y
-sed -i "s/enforcing/permissive/g" /etc/selinux/config
+sed -i "s/enforcing/disabled/g" /etc/selinux/config
 mkdir -p /opt/aws/scripts
 mkdir -p /mnt/iso /var/www/html /opt/aws/bin /var/awslogs/state
-dnf install mlocate netpbm wget gcc python3 nfs-utils parallel sysfsutils iftop iotop unzip cmake lm_sensors -y
+dnf install netpbm -y
+dnf install wget -y
+dnf install gcc -y
+dnf install python3 -y
+dnf install nfs-utils -y
+dnf install parallel -y
+dnf install sysfsutils -y
+dnf install iftop -y
+dnf install iotop -y
+dnf install unzip -y
+dnf install cmake -y
+dnf install lm_sensors -y
+dnf install lua5.1 -y
+dnf install iw -y
+dnf install alsa-utils -y
+dnf install dracut-tools -y
+dnf install mlocate -y
 updatedb
 dnf install cockpit-* -y
 dnf install mod_ssl -y
@@ -37,7 +53,7 @@ systemctl disable firewalld
 systemctl stop firewalld
 echo "tmpfs   /var/log    tmpfs    defaults,noatime,nosuid,mode=0755,size=100m    0 0" >>/etc/fstab
 mount -a
-dnf groupinstall "Xfce" --with-optional --hidden -y
+dnf groupinstall "GNOME" --with-optional --hidden -y
 dnf install chromium -y
 dnf install flatpak -y
 dnf flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -49,16 +65,10 @@ echo "enabled=1" >>/etc/yum.repos.d/webmin.repo
 wget http://www.webmin.com/jcameron-key.asc
 rpm --import jcameron-key.asc
 dnf install webmin
-# dnf install snapd -y
-# systemctl enable --now snapd.socket
-# systemctl enable snapd
-# systemctl start snapd
-# snap install snap-store
-# ln -s /var/lib/snapd/snap /snap
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
-echo "session=xfce" >>/etc/tigervnc/vncserver-config-mandatory
+echo "session=gnome" >>/etc/tigervnc/vncserver-config-mandatory
 echo "securitytypes=vncauth,tlsvnc" >>/etc/tigervnc/vncserver-config-mandatory
 echo "desktop=sandbox" >>/etc/tigervnc/vncserver-config-mandatory
 echo "geometry=1920x1280" >>/etc/tigervnc/vncserver-config-mandatory
