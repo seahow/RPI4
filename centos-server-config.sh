@@ -10,7 +10,7 @@ dnf install expect -y
 dnf install lsof -y
 useradd centos
 usermod -g wheel centos
-echo "centos    ALL=(ALL:ALL)   ALL" >> /etc/sudoers
+echo "centos    ALL=(ALL:ALL)   ALL" >>/etc/sudoers
 ./setpassroot.sh
 ./setpasscentos.sh
 dnf config-manager --enable PowerTools
@@ -23,7 +23,7 @@ dnf update -y
 sed -i "s/enforcing/permissive/g" /etc/selinux/config
 mkdir -p /opt/aws/scripts
 mkdir -p /mnt/iso /var/www/html /opt/aws/bin /var/awslogs/state
-dnf install mlocate netpbm expect wget gcc python3 samba nfs-utils parallel s3cmd sysfsutils iftop iotop unzip cmake -y
+dnf install mlocate netpbm wget gcc python3 nfs-utils parallel s3cmd sysfsutils iftop iotop unzip cmake -y
 updatedb
 dnf install cockpit-* -y
 dnf install mod_ssl -y
@@ -35,7 +35,7 @@ rpm -Uvh --quiet https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/arm64/la
 sed -i 's/.*DefaultLimitNOFILE=.*/DefaultLimitNOFILE=16384/g' /etc/systemd/system.conf
 systemctl disable firewalld
 systemctl stop firewalld
-echo "tmpfs   /var/log    tmpfs    defaults,noatime,nosuid,mode=0755,size=100m    0 0" >> /etc/fstab
+echo "tmpfs   /var/log    tmpfs    defaults,noatime,nosuid,mode=0755,size=100m    0 0" >>/etc/fstab
 mount -a
 dnf groupinstall "Xfce" --with-optional --hidden -y
 dnf install chromium -y
@@ -47,11 +47,11 @@ systemctl start snapd
 snap install snap-store
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
-echo ":1=root" >> /etc/tigervnc/vncserver.users
-echo "session=xfce" >> /etc/tigervnc/vncserver-config-mandatory
-echo "securitytypes=vncauth,tlsvnc" >> /etc/tigervnc/vncserver-config-mandatory
-echo "desktop=sandbox" >> /etc/tigervnc/vncserver-config-mandatory
-echo "geometry=1920x1280" >> /etc/tigervnc/vncserver-config-mandatory
+echo ":1=root" >>/etc/tigervnc/vncserver.users
+echo "session=xfce" >>/etc/tigervnc/vncserver-config-mandatory
+echo "securitytypes=vncauth,tlsvnc" >>/etc/tigervnc/vncserver-config-mandatory
+echo "desktop=sandbox" >>/etc/tigervnc/vncserver-config-mandatory
+echo "geometry=1920x1280" >>/etc/tigervnc/vncserver-config-mandatory
 ./vncpasswd.sh
 systemctl enable vncserver@:1.service
 systemctl start vncserver@:1.service
