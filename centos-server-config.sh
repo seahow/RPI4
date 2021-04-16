@@ -45,6 +45,7 @@ dnf install cockpit-* -y
 dnf install mod_ssl -y
 systemctl enable --now cockpit.socket
 systemctl start --now cockpit.socket
+systemctl disable sssd
 dnf install awscli -y
 rpm -Uvh https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_arm64/amazon-ssm-agent.rpm
 rpm -Uvh --quiet https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/arm64/latest/amazon-cloudwatch-agent.rpm
