@@ -69,14 +69,19 @@ dnf install webmin -y
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
+# echo ":2=centos" >>/etc/tigervnc/vncserver.users
 echo "session=xfce" >>/etc/tigervnc/vncserver-config-mandatory
+# echo "session=gnome" >>/etc/tigervnc/vncserver-config-mandatory
 echo "securitytypes=vncauth,tlsvnc" >>/etc/tigervnc/vncserver-config-mandatory
 echo "desktop=sandbox" >>/etc/tigervnc/vncserver-config-mandatory
 echo "geometry=1920x1280" >>/etc/tigervnc/vncserver-config-mandatory
 ./vncpasswd.sh
 systemctl enable vncserver@:1.service
 systemctl start vncserver@:1.service
+# systemctl enable vncserver@:2.service
+# systemctl start vncserver@:2.service
 vncsession root :1
+# vncsession centos :1
 systemctl set-default multi-user.target
 systemctl disable sssd
 systemctl disable firewalld
