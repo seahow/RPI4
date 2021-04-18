@@ -54,7 +54,7 @@ systemctl disable firewalld
 systemctl stop firewalld
 echo "tmpfs   /var/log    tmpfs    defaults,noatime,nosuid,mode=0755,size=100m    0 0" >>/etc/fstab
 mount -a
-dnf groupinstall "GNOME" --with-optional --hidden -y
+dnf groupinstall "XFCE" --with-optional --hidden -y
 dnf install chromium -y
 dnf install flatpak -y
 dnf flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -69,7 +69,7 @@ dnf install webmin -y
 dnf install gnome-software -y
 dnf install tigervnc-server tigervnc-server-module -y
 echo ":1=root" >>/etc/tigervnc/vncserver.users
-echo "session=gnome" >>/etc/tigervnc/vncserver-config-mandatory
+echo "session=xfce" >>/etc/tigervnc/vncserver-config-mandatory
 echo "securitytypes=vncauth,tlsvnc" >>/etc/tigervnc/vncserver-config-mandatory
 echo "desktop=sandbox" >>/etc/tigervnc/vncserver-config-mandatory
 echo "geometry=1920x1280" >>/etc/tigervnc/vncserver-config-mandatory
@@ -77,4 +77,14 @@ echo "geometry=1920x1280" >>/etc/tigervnc/vncserver-config-mandatory
 systemctl enable vncserver@:1.service
 systemctl start vncserver@:1.service
 vncsession root :1
+systemctl set-default multi-user.target
+systemctl disable sssd
+systemctl disable firewalld
+systemctl disable sssd-kcm
+systemctl disable kdump
+systemctl disable auditd
+dnf install flatpak snapd -y
+systemctl enable snapd.socket --now
+sleep 10
+snap install snap-store
 reboot
