@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+#test hello
+
 growpart /dev/mmcblk0 3
 resize2fs /dev/mmcblk0p3
 sed -ibak -e 's/PasswordAuthentication no/#PasswordAuthentication no/g' -e 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g' -e 's/#AllowAgentForwarding yes/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
